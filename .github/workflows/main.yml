@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Compile code
-      run:
+      run: |
         echo Compile
         find src/cosc202/andie/ -type f -name "*.java" | xargs javac -d bin -classpath bin:lib/*
   test:
