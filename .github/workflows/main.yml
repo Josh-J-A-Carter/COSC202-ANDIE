@@ -60,7 +60,7 @@ jobs:
         #Copy resources/libraries into bin
         cp -r src/resources bin
         cp lib/flatlaf-3.1.1.jar bin
-        - cp lib/flatlaf-intellij-themes-3.1.1.jar bin
+        cp lib/flatlaf-intellij-themes-3.1.1.jar bin
         #Go into bin and extract each library
         cd bin
         for filename in ./*.jar; do
