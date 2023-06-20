@@ -21,14 +21,22 @@ jobs:
         java-version: 17
 
     - name: Compile Code
-      run: |
-        echo Compile
-        find ./src/cosc202/andie/ -type f -name "*.java" -print0 | xargs -0 javac -d bin -classpath ./bin:lib/*
+      run: find ./src/cosc202/andie/ -type f -name "*.java" -print0 | xargs -0 javac -d bin -classpath ./bin:lib/*
+        
+    - name: Javadoc
+      run:  find src/cosc202/andie/ -type f -name "*.java" -print0 | xargs -0 javadoc -d docs -classpath bin:lib/*
+      
   test:
     needs: build
     runs-on: ubuntu-latest
+    
     steps:
-    - run: echo Build
+    - name: Unit Testing
+      run: |
+       echo "Attempting to run unit tests..."
+       javac -d bin -classpath bin:lib/* src/test/cosc202/andie/*.java
+       java -jar lib/junit-platform-console-standalone-1.9.3.jar -cp bin --select-package test.cosc202.andie
+    
   package:
     needs: test
     runs-on: ubuntu-latest
