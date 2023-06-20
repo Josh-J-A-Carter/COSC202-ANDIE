@@ -5,7 +5,7 @@
 
 ANDIE is a non-destructive image editor which can be used to easily edit and manipulate images. The sequence of operations applied to the image is stored in an operations file, meaning that they can be undone or redone. None of the original image information is lost in this process. 
 
-[Click here](https://cosc202-team-b.cspages.otago.ac.nz/andie/) to open the ANDIE release page containing the JAR file download and the online Javadoc.
+A JAR file download and the Javadoc can be found within the top-level directory.
 
 
 ### Running the program
@@ -53,9 +53,9 @@ To export the image with the operations applied to it, select the **File > Expor
 ## Who did what
 
 **Josh:**
-* Exception handling; `UserMessage`, refactored a lot of `EditableImage`, try/catch statements in most files
+* Exception handling; `UserMessage`, refactored a lot of `EditableImage`, try/catch statements in most files.
 * Error avoidance; confirming before exiting with unsaved changes, confirming before overwriting files, etc. Wrote `AndieFileChooser` to help with error avoidance.
-* Altered multilingual support so that it refreshes without needing to restart the program.
+* Multilingual support; can change the language without restarting the program.
 * Translated JFileChooser and JColorChooser so that they match the current language.
 * Drawing functions; added the drawing tools and a brush tool, with different fill, size, and colour selection options.
 * Added the ability to change the theme (look and feel); the ANDIE icon changes to match the colour of the theme.
@@ -82,10 +82,6 @@ To export the image with the operations applied to it, select the **File > Expor
 * Mouse selection
 * Crop to selection
 * Filtering only the selection; altered a lot of the code in the `EditableImage` refresh method and the image transformation operations so that the filters within the selection are applied correctly after transforming an image. 
-
-**Chris:** 
-* Image export
-* Multilingual support
 * Keyboard shortcuts
 
 **Abby:**
@@ -97,11 +93,3 @@ To export the image with the operations applied to it, select the **File > Expor
 * Filtering only the selection; altered most of the colour and filter operations to optionally take the coordinates of a selection and only modify within that selection.
 * Restructured the emboss and Sobel filters created by Anthony so that they are each contained within a single class and menu. 
 * Macros; altered the `AndieFileChooser` class so that it can optionally filter to ops files rather than image files, added a button to the toolbar for the new macro dialog pop-up. 
-
-
-## How code was tested
-* By inspecting the code to ensure that it is logically correct and will do what we expect
-* By manually testing the features as they are added
-* By peer-reviewing code - all merges to the main branch need to be approved
-* By adding JUnit tests and a CI pipeline so that we can make sure all the tests pass within the main branch
-* By having people other than computer science students test the program. 
