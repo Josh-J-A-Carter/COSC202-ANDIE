@@ -11,7 +11,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - run: echo Build
+    - name: Compile code
+      run:
+        echo Compile
+        find src/cosc202/andie/ -type f -name "*.java" | xargs javac -d bin -classpath bin:lib/*
   test:
     needs: build
     runs-on: ubuntu-latest
