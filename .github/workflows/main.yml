@@ -31,12 +31,50 @@ jobs:
        echo "Attempting to run unit tests..."
        javac -d bin -classpath bin:lib/* src/test/cosc202/andie/*.java
        java -jar lib/junit-platform-console-standalone-1.9.3.jar -cp bin --select-package test.cosc202.andie
+       
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-artifacts
+        path: bin/
     
   package:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - run: echo Build
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 17
+    
+    - name: Download Artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: build-artifacts
+
+    - name: Build the JAR file
+      run: |
+        #Copy resources/libraries into bin
+        cp -r src/resources bin
+        cp lib/flatlaf-3.1.1.jar bin
+        - cp lib/flatlaf-intellij-themes-3.1.1.jar bin
+        #Go into bin and extract each library
+        cd bin
+        for filename in ./*.jar; do
+        echo "merge library $filename to fat jar"
+        jar xf "$filename"
+        rm -rf META-INF
+        rm module-info.class #Don't need these files
+        rm "$filename" #We want to remove the original JAR file so that the resulting JAR isn't massive
+        done
+        #Go back into parent directory (ANDIE) and create the JAR
+        cd ..
+        ls -a
+        jar --create --manifest=MANIFEST.MF --file=ANDIE.jar -C bin .
+        
   deploy:
     needs: package
     runs-on: ubuntu-latest
