@@ -53,9 +53,9 @@ To export the image with the operations applied to it, select the **File > Expor
 ## Who did what
 
 **Josh:**
-* Exception handling; `UserMessage`, refactored a lot of `EditableImage`, try/catch statements in most files
+* Exception handling; `UserMessage`, refactored a lot of `EditableImage`, try/catch statements in most files.
 * Error avoidance; confirming before exiting with unsaved changes, confirming before overwriting files, etc. Wrote `AndieFileChooser` to help with error avoidance.
-* Altered multilingual support so that it refreshes without needing to restart the program.
+* Multilingual support; can change the language without restarting the program.
 * Translated JFileChooser and JColorChooser so that they match the current language.
 * Drawing functions; added the drawing tools and a brush tool, with different fill, size, and colour selection options.
 * Added the ability to change the theme (look and feel); the ANDIE icon changes to match the colour of the theme.
@@ -82,10 +82,6 @@ To export the image with the operations applied to it, select the **File > Expor
 * Mouse selection
 * Crop to selection
 * Filtering only the selection; altered a lot of the code in the `EditableImage` refresh method and the image transformation operations so that the filters within the selection are applied correctly after transforming an image. 
-
-**Chris:** 
-* Image export
-* Multilingual support
 * Keyboard shortcuts
 
 **Abby:**
