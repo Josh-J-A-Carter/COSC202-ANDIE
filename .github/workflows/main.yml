@@ -26,19 +26,6 @@ jobs:
     - name: Javadoc
       run:  find src/cosc202/andie/ -type f -name "*.java" -print0 | xargs -0 javadoc -d docs -classpath bin:lib/*
       
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Java
-      uses: actions/setup-java@v1
-      with:
-        java-version: 17
-
     - name: Unit Testing
       run: |
        echo "Attempting to run unit tests..."
@@ -46,7 +33,7 @@ jobs:
        java -jar lib/junit-platform-console-standalone-1.9.3.jar -cp bin --select-package test.cosc202.andie
     
   package:
-    needs: test
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - run: echo Build
