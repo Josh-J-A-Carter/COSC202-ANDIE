@@ -31,6 +31,14 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 17
+
     - name: Unit Testing
       run: |
        echo "Attempting to run unit tests..."
