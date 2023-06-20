@@ -32,11 +32,17 @@ jobs:
        javac -d bin -classpath bin:lib/* src/test/cosc202/andie/*.java
        java -jar lib/junit-platform-console-standalone-1.9.3.jar -cp bin --select-package test.cosc202.andie
        
-    - name: Upload Artifacts
+    - name: Upload Bin
       uses: actions/upload-artifact@v2
       with:
         name: build-artifacts
         path: bin/
+
+    - name: Upload Javadocs
+      uses: actions/upload-artifact@v2
+      with:
+        name: javadocs
+        path: docs/
     
   package:
     needs: build
@@ -74,9 +80,33 @@ jobs:
         cd ..
         ls -a
         jar --create --manifest=MANIFEST.MF --file=ANDIE.jar -C bin .
-        
-  deploy:
+   
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: jar-file
+        path: ./ANDIE.jar
+
+  pages:
     needs: package
     runs-on: ubuntu-latest
     steps:
-    - run: echo Build
+    
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    
+    - name: Download Jar File
+      uses: actions/download-artifact@v2
+      with:
+        name: jar-file
+
+    - name: Download Javadocs
+      uses: actions/download-artifact@v2
+      with:
+        name: javadocs
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.1.3
+      with:
+          branch: gh-pages
+          folder: .
