@@ -10,11 +10,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Compile code
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Java
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+
+    - name: Compile Code
       run: |
         echo Compile
-        find ./src/cosc202/andie/ -type f -name "*.java" | xargs javac -d bin -classpath ./bin:lib/*
+        find ./src/cosc202/andie/ -type f -name "*.java" -print0 | xargs -0 javac -d bin -classpath ./bin:lib/*
   test:
     needs: build
     runs-on: ubuntu-latest
