@@ -1,5 +1,7 @@
 # Big Fish ANDIE information
 
+![A screenshot of the software called ANDIE in action!](ANDIE-screenshot.png)
+
 
 ## Brief user guide
 
